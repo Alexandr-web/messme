@@ -1,0 +1,13 @@
+@supports (backdrop-filter: blur(10px)) {
+    .auth__form {
+        background-color: rgba($grey, .1);
+        backdrop-filter: blur(10px);
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .header {
+        background-color: rgba($white, .6);
+        backdrop-filter: blur(10px);
+    }
+}
