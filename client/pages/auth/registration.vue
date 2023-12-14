@@ -1,7 +1,9 @@
 <template>
     <div class="auth__inner">
+        <vAlert v-bind:alert="alertData" v-bind:open="openAlert" v-on:close="() => openAlert = false" />
         <h1 class="auth__back-title">Регистрация</h1>
-        <vForm v-bind:className="['auth__form']" v-bind:fields="fields" v-bind:textBtn="textBtn" />
+        <vForm v-bind:className="['auth__form']" v-bind:fields="fields" v-bind:textBtn="textBtn" v-on:submit="registration"
+            v-on:alertMessage="alertMessage" />
         <div class="auth__alternative">
             <p class="auth__alternative-desc">
                 Есть аккаунт?
@@ -12,15 +14,25 @@
 </template>
 <script>
 import vForm from "@/components/vForm.vue";
+import vAlert from "@/components/vAlert.vue";
 
 export default {
     name: "RegistrationPage",
-    components: { vForm, },
+    components: {
+        vForm,
+        vAlert,
+    },
     head: {
         title: "Регистрация",
     },
     layout: "auth",
     data: () => ({
+        openAlert: false,
+        alertData: {
+            type: "",
+            title: "",
+            text: "",
+        },
         fields: [
             {
                 name: "name",
@@ -102,5 +114,14 @@ export default {
         ],
         textBtn: "Зарегистрироваться",
     }),
+    methods: {
+        registration(fd) {
+            console.log(fd);
+        },
+        alertMessage(m) {
+            this.alertData = m;
+            this.openAlert = true;
+        },
+    },
 }
 </script>

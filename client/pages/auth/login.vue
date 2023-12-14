@@ -1,9 +1,9 @@
 <template>
     <div class="auth__inner">
         <h1 class="auth__back-title">Вход</h1>
-        <vAlert v-bind:alert="alertData" />
+        <vAlert v-bind:alert="alertData" v-bind:open="openAlert" v-on:close="() => openAlert = false" />
         <vForm v-bind:className="['auth__form']" v-bind:fields="fields" v-bind:textBtn="textBtn" v-on:submit="login"
-            v-on:alertMessage="(m) => alertData = m" />
+            v-on:alertMessage="alertMessage" />
         <div class="auth__alternative">
             <p class="auth__alternative-desc">
                 Нет аккаунта?
@@ -27,6 +27,7 @@ export default {
     },
     layout: "auth",
     data: () => ({
+        openAlert: false,
         alertData: {
             type: "",
             title: "",
@@ -70,6 +71,10 @@ export default {
         login(fd) {
             console.log(fd);
         },
+        alertMessage(m) {
+            this.alertData = m;
+            this.openAlert = true;
+        }
     },
 }
 </script>
