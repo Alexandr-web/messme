@@ -1,7 +1,9 @@
 <template>
     <div class="auth__inner">
+        <vAlert v-bind:alert="alertData" v-bind:open="openAlert" v-on:close="() => openAlert = false" />
         <h1 class="auth__back-title">Регистрация</h1>
-        <vForm v-bind:className="['auth__form']" v-bind:fields="fields" v-bind:textBtn="textBtn" />
+        <vForm v-bind:className="['auth__form']" v-bind:fields="fields" v-bind:textBtn="textBtn" v-on:submit="registration"
+            v-on:alertMessage="alertMessage" />
         <div class="auth__alternative">
             <p class="auth__alternative-desc">
                 Есть аккаунт?
@@ -12,10 +14,16 @@
 </template>
 <script>
 import vForm from "@/components/vForm.vue";
+import vAlert from "@/components/vAlert.vue";
+import alertDataMixin from "@/mixins/alertDataMixin";
 
 export default {
     name: "RegistrationPage",
-    components: { vForm, },
+    mixins: [alertDataMixin],
+    components: {
+        vForm,
+        vAlert,
+    },
     head: {
         title: "Регистрация",
     },
@@ -102,5 +110,21 @@ export default {
         ],
         textBtn: "Зарегистрироваться",
     }),
+    methods: {
+        async registration(fd) {
+            try {
+                const res = await this.$store.dispatch("auth.store/registration", fd);
+                const typeAlert = res.status === 201 ? "success" : "failure";
+
+                this.alertMessage({
+                    type: typeAlert,
+                    text: res.message,
+                    title: typeAlert === "success" ? "Успешно" : "Ошибка",
+                });
+            } catch (err) {
+                throw err;
+            }
+        },
+    },
 }
 </script>

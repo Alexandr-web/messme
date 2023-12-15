@@ -1,6 +1,6 @@
 <template>
     <div class="layout layout--empty">
-        <vHeader :isAuthFormat="true" />
+        <vHeader v-bind:isAuthFormat="true" />
         <div class="auth">
             <div class="container">
                 <Nuxt />

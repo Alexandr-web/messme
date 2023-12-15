@@ -1,9 +1,9 @@
 <template>
     <div class="auth__inner">
         <h1 class="auth__back-title">Вход</h1>
-        <vAlert v-bind:alert="alertData" />
+        <vAlert v-bind:alert="alertData" v-bind:open="openAlert" v-on:close="() => openAlert = false" />
         <vForm v-bind:className="['auth__form']" v-bind:fields="fields" v-bind:textBtn="textBtn" v-on:submit="login"
-            v-on:alertMessage="(m) => alertData = m" />
+            v-on:alertMessage="alertMessage" />
         <div class="auth__alternative">
             <p class="auth__alternative-desc">
                 Нет аккаунта?
@@ -15,9 +15,11 @@
 <script>
 import vForm from "@/components/vForm.vue";
 import vAlert from "@/components/vAlert.vue";
+import alertDataMixin from "@/mixins/alertDataMixin";
 
 export default {
     name: "LoginPage",
+    mixins: [alertDataMixin],
     head: {
         title: "Вход",
     },
@@ -27,11 +29,6 @@ export default {
     },
     layout: "auth",
     data: () => ({
-        alertData: {
-            type: "",
-            title: "",
-            text: "",
-        },
         fields: [
             {
                 name: "nickname",

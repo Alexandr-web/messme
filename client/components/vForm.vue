@@ -42,16 +42,6 @@ export default {
     },
     methods: {
         submit(e) {
-            if (!this.allInputsIsSuccess) {
-                this.$emit("alertMessage", {
-                    title: "Ошибка",
-                    text: "Заполните поля формы верно!",
-                    type: "failure",
-                });
-
-                return;
-            }
-
             const form = e.currentTarget;
             const fd = new FormData(form);
 
