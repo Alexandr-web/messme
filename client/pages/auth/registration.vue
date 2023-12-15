@@ -15,9 +15,11 @@
 <script>
 import vForm from "@/components/vForm.vue";
 import vAlert from "@/components/vAlert.vue";
+import alertDataMixin from "@/mixins/alertDataMixin";
 
 export default {
     name: "RegistrationPage",
+    mixins: [alertDataMixin],
     components: {
         vForm,
         vAlert,
@@ -27,12 +29,6 @@ export default {
     },
     layout: "auth",
     data: () => ({
-        openAlert: false,
-        alertData: {
-            type: "",
-            title: "",
-            text: "",
-        },
         fields: [
             {
                 name: "name",
@@ -115,12 +111,19 @@ export default {
         textBtn: "Зарегистрироваться",
     }),
     methods: {
-        registration(fd) {
-            console.log(fd);
-        },
-        alertMessage(m) {
-            this.alertData = m;
-            this.openAlert = true;
+        async registration(fd) {
+            try {
+                const res = await this.$store.dispatch("auth.store/registration", fd);
+                const typeAlert = res.status === 201 ? "success" : "failure";
+
+                this.alertMessage({
+                    type: typeAlert,
+                    text: res.message,
+                    title: typeAlert === "success" ? "Успешно" : "Ошибка",
+                });
+            } catch (err) {
+                throw err;
+            }
         },
     },
 }

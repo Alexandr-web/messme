@@ -15,9 +15,11 @@
 <script>
 import vForm from "@/components/vForm.vue";
 import vAlert from "@/components/vAlert.vue";
+import alertDataMixin from "@/mixins/alertDataMixin";
 
 export default {
     name: "LoginPage",
+    mixins: [alertDataMixin],
     head: {
         title: "Вход",
     },
@@ -27,12 +29,6 @@ export default {
     },
     layout: "auth",
     data: () => ({
-        openAlert: false,
-        alertData: {
-            type: "",
-            title: "",
-            text: "",
-        },
         fields: [
             {
                 name: "nickname",
@@ -71,10 +67,6 @@ export default {
         login(fd) {
             console.log(fd);
         },
-        alertMessage(m) {
-            this.alertData = m;
-            this.openAlert = true;
-        }
     },
 }
 </script>
