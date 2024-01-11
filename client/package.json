@@ -16,12 +16,16 @@
     "vue-template-compiler": "^2.7.10"
   },
   "devDependencies": {
+    "cookie": "^0.6.0",
+    "cookies": "^0.9.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-clean-css": "^4.3.0",
     "gulp-concat": "^2.6.1",
     "gulp-plumber": "^1.2.1",
     "gulp-sass": "^5.1.0",
+    "js-cookie": "^3.0.5",
+    "jwt-decode": "^4.0.0",
     "normalize.css": "^8.0.1",
     "sass": "^1.69.5"
   }

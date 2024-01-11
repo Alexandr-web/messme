@@ -50,7 +50,7 @@ class AuthController {
                 { expiresIn: Math.floor(Date.now() / 1000) + (60 * 60), }
             );
 
-            return res.status(200).json({ message: "Вход выполнен успешно!", status: 200, token, });
+            return res.status(200).json({ message: "Вход выполнен успешно!", status: 200, token: `Bearer ${token}`, });
         } catch (err) {
             console.log(err);
 

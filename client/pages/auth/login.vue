@@ -64,8 +64,24 @@ export default {
         textBtn: "Войти"
     }),
     methods: {
-        login(fd) {
-            console.log(fd);
+        async login(fd) {
+            try {
+                const res = await this.$store.dispatch("auth.store/login", fd);
+                const isOk = res.status === 200;
+                const typeAlert = isOk ? "success" : "failure";
+
+                this.alertMessage({
+                    type: typeAlert,
+                    text: res.message,
+                    title: typeAlert === "success" ? "Успешно" : "Ошибка",
+                });
+
+                if (isOk) {
+                    return this.$router.push("/");
+                }
+            } catch (err) {
+                throw err;
+            }
         },
     },
 }

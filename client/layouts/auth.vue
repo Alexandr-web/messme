@@ -14,6 +14,7 @@ import vHeader from "@/components/vHeader.vue";
 export default {
     components: {
         vHeader,
-    }
+    },
+    middleware: ["userIsNotAuth"]
 }
 </script>

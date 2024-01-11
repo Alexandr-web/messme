@@ -44,8 +44,12 @@ export default {
         submit(e) {
             const form = e.currentTarget;
             const fd = new FormData(form);
+            const data = [...fd.keys()].reduce((acc, key) => {
+                acc[key] = fd.get(key);
+                return acc;
+            }, {});
 
-            this.$emit("submit", fd);
+            this.$emit("submit", data);
         },
         rulesIsSuccess(name, value) {
             const { rules = [], } = Object.keys(this.fields).reduce((acc, key) => {

@@ -114,13 +114,18 @@ export default {
         async registration(fd) {
             try {
                 const res = await this.$store.dispatch("auth.store/registration", fd);
-                const typeAlert = res.status === 201 ? "success" : "failure";
+                const isOk = res.status === 201;
+                const typeAlert = isOk ? "success" : "failure";
 
                 this.alertMessage({
                     type: typeAlert,
                     text: res.message,
                     title: typeAlert === "success" ? "Успешно" : "Ошибка",
                 });
+
+                if (isOk) {
+                    return this.$router.push("/auth/login");
+                }
             } catch (err) {
                 throw err;
             }

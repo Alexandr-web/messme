@@ -8,11 +8,24 @@ export default class Auth extends Request {
     }
 
     registration(fd) {
-        console.log(fd);
         return this.sendReq(`${this.path}/registration`, {
             method: "POST",
-            headers: { "Accept-Type": "application/json", },
-            body: fd,
+            headers: {
+                "Content-Type": "application/json",
+                "Accept-Type": "application/json",
+            },
+            body: JSON.stringify(fd),
+        });
+    }
+
+    login(fd) {
+        return this.sendReq(`${this.path}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept-Type": "application/json",
+            },
+            body: JSON.stringify(fd),
         });
     }
 }
