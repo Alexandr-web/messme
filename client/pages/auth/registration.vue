@@ -1,9 +1,9 @@
 <template>
     <div class="auth__inner">
-        <vAlert v-bind:alert="alertData" v-bind:open="openAlert" v-on:close="() => openAlert = false" />
+        <vAlert :alert="alertData" :open="openAlert" @close="() => openAlert = false" />
         <h1 class="auth__back-title">Регистрация</h1>
-        <vForm v-bind:className="['auth__form']" v-bind:fields="fields" v-bind:textBtn="textBtn" v-on:submit="registration"
-            v-on:alertMessage="alertMessage" />
+        <vForm :className="['auth__form']" :fields="fields" :textBtn="textBtn" @submit="registration"
+            @alertMessage="alertMessage" />
         <div class="auth__alternative">
             <p class="auth__alternative-desc">
                 Есть аккаунт?

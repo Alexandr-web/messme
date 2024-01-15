@@ -1,17 +1,17 @@
 <template>
     <form class="form" :class="className.join(' ')" @submit.prevent="submit($event)">
-        <div v-for="field in fields" v-bind:key="field.id" class="form__field">
-            <label class="form__label" v-bind:class="{
+        <div v-for="field in fields" :key="field.id" class="form__field">
+            <label class="form__label" :class="{
                 'valid': rulesIsSuccess(field.name, field.value) && field.value,
                 'invalid': !rulesIsSuccess(field.name, field.value) && field.value,
-            }" v-bind:for="field.id">
+            }" :for="field.id">
                 <h3 class="form__field-title">{{ field.title }}</h3>
-                <input class="form__input" v-bind:id="field.id" v-bind:type="field.type" v-bind:placeholder="field.title"
-                    v-bind:name="field.name" v-model="field.value" v-on:input="rulesIsSuccess(field.name, field.value)">
+                <input class="form__input" :id="field.id" :type="field.type" :placeholder="field.title"
+                    :name="field.name" v-model="field.value" @input="rulesIsSuccess(field.name, field.value)">
             </label>
         </div>
         <div class="form__field" v-if="textBtn">
-            <button class="form__submit" type="submit" v-bind:disabled="!allInputsIsSuccess">{{ textBtn }}</button>
+            <button class="form__submit" type="submit" :disabled="!allInputsIsSuccess">{{ textBtn }}</button>
         </div>
     </form>
 </template>

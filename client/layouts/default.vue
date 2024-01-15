@@ -1,6 +1,5 @@
 <template>
 	<div class="layout layout--default">
-		<vHeader />
 		<Nuxt />
 	</div>
 </template>
